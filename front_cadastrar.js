@@ -1,0 +1,43 @@
+//  let botao = document.getElementById("btnCadastrar");
+//  botao.addEventListener("click",()=>{
+//     resp = document.getElementById("r");
+//     let nomeDigitado = document.getElementById("nome").value;
+//     resp.innerHTML = nomeDigitado;
+//  });
+
+const frmCadastro = document.getElementById("frmCadastro");
+const inputNome = document.getElementById("nome");
+const inputCpf = document.getElementById("cpf");
+const inputCep = document.getElementById("cep");
+const inputUf = document.getElementById("uf");
+const inputRua = document.getElementById("rua");
+const inputNumero = document.getElementById("numero");
+const inputComplemento = document.getElementById("complemento");
+
+function salvar(e){
+    e.preventDefault();
+    console.log("Botão funcionando");
+    let nome = inputNome.value
+    let cpf  = inputCpf.value 
+    let cep =  inputCep.value  
+    let uf  = inputUf.value  
+    let rua = inputRua.value   
+    let numero = inputNumero.value   
+    let complemento = inputComplemento.value 
+    
+    let novoAluno = {
+        nome,cpf, cep, uf, rua, numero, complemento
+    }
+    console.log(novoAluno)
+}
+try {
+    const resposta = await fetch(API, {
+        method: "POST",
+        body:novoAluno,
+        headers:{"Content-Type" : "application/json"}
+    });
+    resposta.status ===201 ? window.location.href = "index.html" : console.log("Erro ao cadastrar")
+}catch(e){
+    console.error(e)
+}
+frmCadastro.addEventListener("submit", salvar)
